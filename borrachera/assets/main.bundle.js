@@ -18,9 +18,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 var MasterURLService = (function () {
     function MasterURLService() {
-        this._url = "http://localhost:1337/";
-        // this.url = "https://aplicacion-adrianeguez.c9users.io"
-        // this.url = "https://asdasd-asdasdasd.herokuapp.com"
+        this._url = "https://examen-twj-chavezpatricio-patricioalejandro.c9users.io/";
     }
     Object.defineProperty(MasterURLService.prototype, "url", {
         get: function () {
