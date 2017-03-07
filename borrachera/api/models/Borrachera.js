@@ -8,7 +8,20 @@
 module.exports = {
 
   attributes: {
-
+    motivo: {
+      type: 'string',
+      required: true
+    },
+    latitudEmpezo: {
+      type: 'integer'
+    },
+    longitudEmpezo: {
+      type: 'integer'
+    },
+    idUsuario: {
+      model: 'Usuario',
+      required: true
+    }
   }
 };
 

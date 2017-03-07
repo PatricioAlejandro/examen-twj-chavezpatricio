@@ -1,0 +1,126 @@
+<h1>{{title}}</h1>
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+      <br>
+    </div>
+    <div class="col-sm-6">
+      <form class="animated bounceIn" (ngSubmit)="crearUsuario(NuevoUsuarioForm)" #NuevoUsuarioForm="ngForm">
+        <div class="form-group">
+          <label>Usuario</label>
+          <input required
+                 minlength="4"
+                 type="text"
+                 class="form-control"
+                 placeholder="Digite su nombre"
+                 name="nombre"
+                 [(ngModel)]="nuevoUsuario.nombre"
+                 #nombre="ngModel"
+                 #nombreElm>
+        </div>
+        <div class="form-group">
+          <label>Ciudad Residencia</label>
+          <input required
+                 type="text"
+                 class="form-control"
+                 placeholder="Digite su ciudad de Residencia actual"
+                 name="ciudadResidencia"
+                 [(ngModel)]="nuevoUsuario.ciudadResidencia"
+                 #ciudadResidencia="ngModel"
+                 #nombreElm>
+        </div>
+        <div class="form-group">
+          <label>Fecha Nacimiento</label>
+          <input type="date"
+                 class="form-control"
+                 placeholder="Ingrese su fecha de nacimiento"
+                 name="fechaNacimiento"
+                 [(ngModel)]="nuevoUsuario.fechaNacimiento"
+                 #fechaNacimiento="ngModel"
+                 #nombreElm>
+        </div>
+        <button [disabled]="disabledButtons.NuevoUsuarioFormSubmitButton||!NuevoUsuarioForm.valid" type="submit"
+                class="btn btn-block btn-success">Crear
+        </button>
+      </form>
+    </div>
+    <br>
+  </div>
+  <div class="row">
+    <div class="col-sm-12 animated flipInX" *ngFor="let usuario of usuarios">
+      <div class="text-left">
+
+        <h3>{{usuario.nombre}}</h3>
+        <p>ID: {{usuario.id}}</p>
+
+      </div>
+      <div class="row animated flipInY" [hidden]="!usuario.FormularioCerrado">
+        <div class="col-sm-5">
+          <button class="btn btn-block btn-info"
+                  (click)="usuario.FormularioCerrado = !usuario.FormularioCerrado"
+          >Actualizar
+          </button>
+        </div>
+        <div class="col-sm-2"></div>
+        <div class="col-sm-5">
+          <button class="btn btn-block btn-danger" (click)="borrarUsuario(usuario.id)">Borrar</button>
+        </div>
+        <div class="col-sm-12">
+          <a [routerLink]="[usuario.id,'borrachera']">Ir a las Borracheras de {{usuario.nombre}}...</a>
+        </div>
+      </div>
+      <div class="div" [hidden]="usuario.FormularioCerrado">
+        <form action="">
+          <form class="animated bounceIn" (ngSubmit)="actualizarUsuario(usuario)" #EditFormUsuario="ngForm">
+            <div class="form-group">
+              <label>Nombre</label>
+              <input required
+                     type="text"
+                     class="form-control"
+                     placeholder="Digite un nombre de tienda como: Adidas"
+                     name="nombre"
+                     [(ngModel)]="usuario.nombre"
+                     #nombre="ngModel"
+                     #nombreElm>
+            </div>
+            <div class="form-group">
+              <label>Ciudad Residencia</label>
+              <input required
+                     type="text"
+                     class="form-control"
+                     placeholder="Digite su ciudad de Residencia actual"
+                     name="ciudadResidencia"
+                     [(ngModel)]="usuario.ciudadResidencia"
+                     #ciudadResidencia="ngModel"
+                     #nombreElm>
+            </div>
+            <div class="form-group">
+              <label>Fecha Nacimiento</label>
+              <input type="date"
+                     class="form-control"
+                     placeholder="Ingrese su fecha de nacimiento"
+                     name="fechaNacimiento"
+                     [(ngModel)]="usuario.fechaNacimiento"
+                     #fechaNacimiento="ngModel"
+                     #nombreElm>
+            </div>
+
+            <button [disabled]="disabledButtons.EditBorracheraForm||!EditFormUsuario.valid" type="submit"
+                    class="btn btn-block btn-success">Update
+            </button>
+            <button type="button"
+                    class="btn btn-block btn-warning"
+                    (click)="usuario.FormularioCerrado = !usuario.FormularioCerrado"
+            >
+              Cancelar
+            </button>
+          </form>
+        </form>
+      </div>
+
+    </div>
+  </div>
+
+
+</div>

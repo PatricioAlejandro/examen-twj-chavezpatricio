@@ -8,7 +8,21 @@
 module.exports = {
 
   attributes: {
-
+    nombre: {
+      type: 'string',
+      required: true
+    },
+    ciudadResidencia: {
+      type: 'string',
+      required: true
+    },
+    fechaNacimiento: {
+      type: 'date'
+    },
+    borracheras: {
+      collection: 'Borrachera',
+      via: 'idUsuario'
+    }
   }
 };
 

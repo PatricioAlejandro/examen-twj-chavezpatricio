@@ -1,0 +1,118 @@
+<h1>{{title}} Sr.(a) {{usuario.nombre}}
+</h1>
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+      <br>
+    </div>
+    <div class="col-sm-6">
+      <form class="animated bounceIn" (ngSubmit)="crearBorrachera(NuevaBorracheraForm)" #NuevaBorracheraForm="ngForm">
+        <div class="form-group">
+          <label>Motivo</label>
+          <input required
+                 type="text"
+                 class="form-control"
+                 placeholder="Porque se emborracho? escriba el motivo"
+                 name="motivo"
+                 [(ngModel)]="nuevaBorrachera.motivo">
+        </div>
+        <div class="form-group">
+          <label>Latitud</label>
+          <input type="number"
+                 class="form-control"
+                 placeholder="Digite la latitud donde comenzo a embriagarse!!"
+                 name="latitudEmpezo"
+                 [(ngModel)]="nuevaBorrachera.latitudEmpezo">
+        </div>
+        <div class="form-group">
+          <label>Longitud</label>
+          <input type="number"
+                 class="form-control"
+                 placeholder="Digite la longitud donde comenzo a embriagarse!!"
+                 name="longitudEmpezo"
+                 [(ngModel)]="nuevaBorrachera.longitudEmpezo">
+        </div>
+        <button [disabled]="disabledButtons.NuevaBorracheraFormSubmitButton||!NuevaBorracheraForm.valid" type="submit"
+                class="btn btn-block btn-success">Crear
+        </button>
+      </form>
+    </div>
+    <br>
+  </div>
+
+  <div class="row">
+    <br>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12 animated flipInX">
+      <div class="table-responsive">
+        <table class="table">
+          <tr>
+            <th>Motivo</th>
+            <th>Latitud</th>
+            <th>Longitud</th>
+            <th>Actualizar</th>
+            <th>Borrar</th>
+          </tr>
+          <tr *ngFor="let borrachera of borracheras">
+            <td> {{borrachera.motivo}}</td>
+            <td> {{borrachera.latitudEmpezo}}</td>
+            <td> {{borrachera.longitudEmpezo}}</td>
+            <td>
+              <button [disabled]="disabledButtons.buttonEditForm"
+                      class="btn btn-block btn-info"
+                      (click)="disabledButtons.EditarBorracheraForm = !disabledButtons.EditarBorracheraForm ; borracheraEditada = {id : borrachera.id, motivo: borrachera.motivo, latitudEmpezo: borrachera.latitudEmpezo, longitudEmpezo: borrachera.longitudEmpezo}; disabledButtons.buttonEditForm = !disabledButtons.buttonEditForm"
+              >Actualizar
+              </button>
+            </td>
+            <td>
+              <button class="btn btn-block btn-danger" (click)="borrarBorrachera(borrachera.id)">Borrar</button>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="row animated flipInX" [hidden]="!disabledButtons.EditarBorracheraForm">
+    <div class="col-sm-6">
+      <form class="animated bounceIn" (ngSubmit)="actualizarBorrachera(borracheraEditada)"
+            #EditBorracheraForm="ngForm">
+        <div class="form-group">
+          <label>Motivo</label>
+          <input required
+                 type="text"
+                 class="form-control"
+                 placeholder="Porque se emborracho? escriba el motivo"
+                 name="motivo"
+                 [(ngModel)]="borracheraEditada.motivo">
+        </div>
+        <div class="form-group">
+          <label>Latitud</label>
+          <input type="number"
+                 class="form-control"
+                 placeholder="Digite la latitud donde comenzo a embriagarse!!"
+                 name="latitudEmpezo"
+                 [(ngModel)]="borracheraEditada.latitudEmpezo">
+        </div>
+        <div class="form-group">
+          <label>Longitud</label>
+          <input type="number"
+                 class="form-control"
+                 placeholder="Digite la longitud donde comenzo a embriagarse!!"
+                 name="longitudEmpezo"
+                 [(ngModel)]="borracheraEditada.longitudEmpezo">
+        </div>
+        <button type="submit"
+                class="btn btn-block btn-success">Actualizar
+        </button>
+        <button type="submit"
+                class="btn btn-block btn-danger">X
+        </button>
+      </form>
+    </div>
+    <div class="col-sm-6"></div>
+  </div>
+</div>
+
